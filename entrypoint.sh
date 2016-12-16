@@ -1,5 +1,5 @@
 #!/bin/bash
-IP=$(ip addr show dev 'eth0' | grep ^[[:blank:]]*inet|grep global|sed -e 's@/@ @g'|awk '{print $2}')
+IP=$(ip addr show dev 'eth0' | grep ^[[:blank:]]*inet|grep global|sed -e 's@/@ @g'|awk '{print $2}')|grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'
 IP6=$(ip addr show dev 'eth0' | grep ^[[:blank:]]*inet6|grep global|sed -e 's@/@ @g'|awk '{print $2}')
 FileName=/tmp/template-index.html
 sed -e 's/IP_CONTAINER/'"$IP"'/g' -e 's/IP6_CONTAINER/'"$IP6"'/g' -i $FileName
